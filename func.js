@@ -1,7 +1,7 @@
 const fdk=require('@fnproject/fdk');
 
 fdk.handle(function(input, ctx){
-	async function fetchData() {
+	function fetchData() {
 		try {
 			const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
 			if (!response.ok) {

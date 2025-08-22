@@ -7,13 +7,13 @@ fdk.handle(function(input, ctx){
 			if (!response.ok) {
 			  throw new Error(`HTTP error! status: ${response.status}`);
 			}
-			console.log(response);
 			const data = await response.json();
 			console.log(data);
 			return data;
 		} catch (error) {
 			console.error('Error fetching data:', error);
+			return error;
 		}
 	}
-  return {"response": fetchData()}
+  return {"body": fetchData()}
 })

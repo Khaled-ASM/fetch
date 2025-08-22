@@ -1,19 +1,16 @@
 const fdk=require('@fnproject/fdk');
 
-fdk.handle(function(input, ctx){
-	async function fetchData() {
-		try {
-			const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
-			if (!response.ok) {
-			  throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			const data = await response.json();
-			console.log(data);
-			return data;
-		} catch (error) {
-			console.error('Error fetching data:', error);
-			return error;
+fdk.handle(async function(input, ctx){
+	try {
+		const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+		if (!response.ok) {
+		  throw new Error(`HTTP error! status: ${response.status}`);
 		}
+		const data = await response.json();
+		console.log(data);
+		return data;
+	} catch (error) {
+		console.error('Error fetching data:', error);
+		return error;
 	}
-  return {"fetch": fetchData()}
 })

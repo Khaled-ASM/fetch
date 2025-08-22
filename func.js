@@ -15,5 +15,5 @@ fdk.handle(function(input, ctx){
 			return error;
 		}
 	}
-  return {"body": fetchData()}
+  return {"response": fetchData()}
 })

@@ -1,16 +1,28 @@
-const fdk=require('@fnproject/fdk');
+const fdk			= require('@fnproject/fdk');
+const common        = require("oci-common");
+const secrets       = require("oci-secrets");
+const vaults        = require("oci-vault");
+const identity      = require("oci-identity");
+const keymanagement = require("oci-keymanagement");
 
 fdk.handle(async function(input, ctx){
-	try {
-		const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
-		if (!response.ok) {
-		  throw new Error(`HTTP error! status: ${response.status}`);
-		}
-		const data = await response.json();
-		console.log(data);
-		return data;
-	} catch (error) {
-		console.error('Error fetching data:', error);
-		return error;
-	}
+	//try {
+		let jiraClientId	= 0;
+		let jiraClientSecret= 0;
+		const provider:ResourcePrincipalAuthenticationDetailsProvider = new common.ResourcePrincipalAuthenticationDetailsProvider(); // using resource principal provider of OCI
+		(async () => {
+		const identityClient 	  = await new identity.IdentityClient({authenticationDetailsProvider: provider});
+		
+		//const provider 			= new common.ResourcePrincipalAuthenticationDetailsProvider();
+        //const identityClient 	= new identity.IdentityClient({ authenticationDetailsProvider: provider });
+		const ociVaultName        = "IBA Vault";
+		const ociCompartmentName  = "NONPROD-Oracle-Integration-CMP";
+		console.log("TenantId: " + provider.getTenantId())
+		console.log("Check log Printed");
+		})();
+		return {"tenantId": "no value"}; //provider.getTenantId()
+	//} catch (error) {
+	//	console.error('Error fetching data:', error);
+	//	return error;
+	//}
 })
